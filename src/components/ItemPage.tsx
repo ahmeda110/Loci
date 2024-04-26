@@ -5,6 +5,9 @@ import searchIcon from '../assets/search-alt-2-svgrepo-com.png'
 import rewards from '../assets/google-opinion-rewards-svgrepo-com.png'
 import categories from '../assets/category-svgrepo-com.png'
 import location from '../assets/location-pin-svgrepo-com.png'
+import watches from '../assets/watchpng.parspng.com-10.png'
+import camera from '../assets/25480_D800_left.png'
+import shoe from '../assets/custom-nike-dunk-high-by-you-shoes.png'
 
 function ItemPage(){
     return(
@@ -33,7 +36,7 @@ function ItemPage(){
             </nav>
 
             <div className="flex h-screen bg-gray-100">
-                <div className="w-64 bg-white text-black">
+                <div className="w-74 bg-white text-black">
                     <nav className="flex flex-col p-4">
                         <a href="#" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={home} alt="Home" />Home
@@ -56,30 +59,50 @@ function ItemPage(){
                         </a>
                     </nav>
                 </div>
-                <div className="flex-1 p-10">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
-                    <div className="px-6 py-4">
-                        <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                        <p className="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                        </p>
+                <div className="flex flex-col h-screen bg-gray-100">
+            {/* Navbar remains unchanged */}
+
+            {/* Main content section */}
+            <div className="flex flex-1 overflow-x-auto">
+                {/* Sidebar remains unchanged */}
+
+                {/* Cards container */}
+                <div className="flex-grow p-10 space-x-6 overflow-auto">
+                    {/* Card 1 */}
+                    <div className="inline-block w-80 h-auto bg-custom-salmon rounded-2xl shadow-2xl p-6 text-white relative">
+                        <p className="text-sm mb-4">Cheap Luxury</p>
+                        <h2 className="font-bold text-3xl mb-2">From Affordable To Designer</h2>
+                        <button className="bg-button-salmon hover:bg-pink-700 text-white font-bold py-2 px-4 rounded text-sm shadow-2xl">
+                            Shop by Category
+                        </button>
+                        <img className="w-48 h-48 object-contain absolute bottom-4 right-4" src={watches} alt="Watches"/>
                     </div>
-                    <div className="px-6 pt-4 pb-2">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Button
+
+                    {/* Card 2 */}
+                    <div className="inline-block w-80 h-auto bg-custom-purple rounded-2xl shadow-2xl p-6 text-white relative">
+                        <img className="w-48 h-48 object-contain absolute bottom-4 right-4" src={camera} alt="Camera"/>
+                        <p className="text-sm mb-4">Photography</p>
+                        <h2 className="font-bold text-3xl mb-2">Nikon DSLR D-800</h2>
+                        <button className="bg-button-purple hover:bg-pink-700 text-white font-bold py-2 px-4 rounded text-sm shadow-2xl">
+                            Shop by Category
                         </button>
                     </div>
-                </div>
 
+                    {/* Card 3 */}
+                    <div className="inline-block w-80 h-auto bg-custom-green rounded-2xl shadow-2xl p-6 text-white relative">
+                        <p className="text-sm mb-4">Bring Bold Fashion</p>
+                        <h2 className="font-bold text-3xl mb-2">Shop Nike, Adidas & More</h2>
+                        <button className="bg-button-green hover:bg-pink-700 text-white font-bold py-2 px-4 rounded text-sm shadow-2xl">
+                            Shop by Category
+                        </button>
+                        <img className="w-48 h-48 object-contain absolute bottom-4 right-4" src={shoe} alt="Shoes"/>
+                    </div>
                 </div>
             </div>
-
         </div>
-        
 
-
-
-
+            </div>
+        </div>
     )
 }
 
