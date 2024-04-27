@@ -4,13 +4,12 @@ function LandingPage(){
     return(
         <div>
             <nav className="bg-white px-4 py-2 flex justify-between items-center border-b-2 border-gray-300">
-                
-                // Left side (e.g., logo or title)
+                {/* Left side nav */}
                 <div className="flex items-center space-x-4">
                     <span className="text-4xl font-bold text-gray-800">Loci</span>
                 </div>
 
-                // Center buttons 
+                {/* Centered buttons */}
                 <div className="flex-grow flex justify-center">
                     <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none">
                         Trending
@@ -23,7 +22,7 @@ function LandingPage(){
                     </button>
                 </div>
 
-                // Right side login and shop now buttons
+                {/* Right side nav */}
                 <div className="flex items-center gap-2">
                     <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none">
                         Log in
