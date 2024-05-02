@@ -1,0 +1,19 @@
+/* Add the scrolling animation */
+.scrolling-text span {
+    display: inline-block;
+    animation: scrollText 20s linear infinite;
+}
+
+@keyframes scrollText {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Define the dark blue background color */
+.bg-dark-blue {
+    background-color: #001f3f; /* Dark blue color code */
+}
