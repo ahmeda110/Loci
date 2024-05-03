@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useRef, useEffect } from 'react';
 import login1 from '../assets/log-in-page-image-1.png';
 import login2 from '../assets/log-in-page-image-2.png';
-import '../LandingPage.css'; // Importing the CSS file for styles
+import cart from '../assets/shopping-cart.png';
+import '../LandingPage.css'; 
 
 function LandingPage() {
+
+    const testimonialContainerRef = useRef<HTMLDivElement>(null);
+
+    // Set up autoscroll interval
+    useEffect(() => {
+        const autoscrollInterval = setInterval(() => {
+            if (testimonialContainerRef.current) {
+                testimonialContainerRef.current.scrollLeft += testimonialContainerRef.current.offsetWidth;
+                if (testimonialContainerRef.current.scrollLeft >= testimonialContainerRef.current.scrollWidth - testimonialContainerRef.current.offsetWidth) {
+                    testimonialContainerRef.current.scrollLeft = 0;
+                }
+            }
+        }, 3000); // Autoscroll every 3 seconds
+
+        return () => clearInterval(autoscrollInterval);
+    }, []);
+
+    const handleScroll = (direction: string) => {
+        if (testimonialContainerRef.current) {
+            console.log('Current scrollLeft:', testimonialContainerRef.current.scrollLeft);
+        console.log('Container offsetWidth:', testimonialContainerRef.current.offsetWidth);
+            if (direction === 'left') {
+                testimonialContainerRef.current.scrollLeft -= testimonialContainerRef.current.offsetWidth;
+            } else if (direction === 'right') {
+                testimonialContainerRef.current.scrollLeft += testimonialContainerRef.current.offsetWidth;
+            }
+            console.log('Updated scrollLeft:', testimonialContainerRef.current?.scrollLeft);
+        }
+    };
+
     return (
         <div>
             {/* Navigation bar */}
@@ -99,16 +130,61 @@ function LandingPage() {
                 {/* Container for the testimonial section */}
                 <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
                     {/* Left half for the testimonial */}
-                    <div className="w-full md:w-1/2 text-center md:text-left px-4">
-                        <p className="text-3xl font-bold text-gray-800">
-                            365 orders in the last 2 days
+                    <div className="w-full md:w-1/2 text-center md:text-center px-4">
+                        {/* Add the image of the shopping cart */}
+                        <img src={cart} alt="Shopping Cart" className="mx-auto" style={{ width: '200px', height: '200px', marginBottom: '-50px'}} />
+                        
+                        {/* Text for 365 orders in the last 2 days */}
+                        <p className="text-9xl font-bold text-gray-800">
+                            365
+                        </p>
+
+                        <p className="text-7xl font-thin text-gray-800">
+                            Orders
+                        </p>   
+
+                        <p className="text-5xl font-thin text-gray-800">
+                            In The Last 2 Days
                         </p>
                     </div>
 
-                    {/* Right half for any other content (you can add content here) */}
+                    {/* Right half for testimonials */}
                     <div className="w-full md:w-1/2 px-4">
-                        {/* You can add other content here */}
+                        {/* Container for testimonials */}
+                        <div
+                            className="testimonials-container bg-blue-500 p-4 rounded-lg relative"
+                            ref={testimonialContainerRef}
+                            style={{ overflowX: 'auto', width: '30rem', height: '20rem'}}
+                        >
+                            {/* Scroll buttons */}
+                            <button
+                                className="scroll-button absolute left-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-purple-700 text-white hover:bg-purple-900"
+                                onClick={() => handleScroll('left')}
+                            >
+                                &lt;
+                            </button>
+                            <button
+                                className="scroll-button absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-purple-700 text-white hover:bg-purple-900"
+                                onClick={() => handleScroll('right')}
+                            >
+                                &gt;
+                            </button>
+
+                            {/* Testimonial items */}
+                            <div className="testimonial-content" style={{ overflowX: 'hidden' }}>
+                                <div className="testimonial-item w-full text-white text-center p-4">
+                                    <p>"This is an amazing service! I highly recommend it!"</p>
+                                </div>
+                                <div className="testimonial-item w-full text-white text-center p-4">
+                                    <p>"Outstanding quality and great customer support."</p>
+                                </div>
+                                <div className="testimonial-item w-full text-white text-center p-4">
+                                    <p>"I've never had such a smooth shopping experience!"</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
@@ -116,7 +192,7 @@ function LandingPage() {
                 {/* About section */}
             </div>
 
-            {/* Add any other content here */}
+            
         </div>
     );
 }
