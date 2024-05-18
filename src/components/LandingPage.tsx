@@ -2,10 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import login1 from '../assets/log-in-page-image-1.png';
 import login2 from '../assets/log-in-page-image-2.png';
 import cart from '../assets/shopping-cart.png';
-import '../LandingPage.css'; 
+import fire from '../assets/fire-icon.png';
+import '../LandingPage.css';
 
 function LandingPage() {
-
     const testimonialContainerRef = useRef<HTMLDivElement>(null);
 
     // Set up autoscroll interval
@@ -13,7 +13,10 @@ function LandingPage() {
         const autoscrollInterval = setInterval(() => {
             if (testimonialContainerRef.current) {
                 testimonialContainerRef.current.scrollLeft += testimonialContainerRef.current.offsetWidth;
-                if (testimonialContainerRef.current.scrollLeft >= testimonialContainerRef.current.scrollWidth - testimonialContainerRef.current.offsetWidth) {
+                if (
+                    testimonialContainerRef.current.scrollLeft >=
+                    testimonialContainerRef.current.scrollWidth - testimonialContainerRef.current.offsetWidth
+                ) {
                     testimonialContainerRef.current.scrollLeft = 0;
                 }
             }
@@ -22,16 +25,25 @@ function LandingPage() {
         return () => clearInterval(autoscrollInterval);
     }, []);
 
-    const handleScroll = (direction: string) => {
-        if (testimonialContainerRef.current) {
-            console.log('Current scrollLeft:', testimonialContainerRef.current.scrollLeft);
-        console.log('Container offsetWidth:', testimonialContainerRef.current.offsetWidth);
-            if (direction === 'left') {
-                testimonialContainerRef.current.scrollLeft -= testimonialContainerRef.current.offsetWidth;
-            } else if (direction === 'right') {
-                testimonialContainerRef.current.scrollLeft += testimonialContainerRef.current.offsetWidth;
-            }
-            console.log('Updated scrollLeft:', testimonialContainerRef.current?.scrollLeft);
+    // Get the current date
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = currentDate.toLocaleString('default', { month: 'long' });
+    const year = currentDate.getFullYear();
+
+    const scrollToTestimonials = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        event.preventDefault();
+        const testimonialsSection = document.getElementById('testimonials');
+        if (testimonialsSection) {
+            testimonialsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+
+    const scrollToTrending = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        event.preventDefault();
+        const trendingSection = document.getElementById('trending');
+        if (trendingSection) {
+            trendingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     };
 
@@ -48,12 +60,12 @@ function LandingPage() {
 
                 {/* Centered buttons */}
                 <div className="flex-grow flex justify-center space-x-4">
-                    <a href="#trending">
+                    <a href="#trending" onClick={scrollToTrending}>
                         <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none">
                             Trending
                         </button>
                     </a>
-                    <a href="#testimonials">
+                    <a href="#testimonials" onClick={scrollToTestimonials}>
                         <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none">
                             Testimonials
                         </button>
@@ -77,7 +89,7 @@ function LandingPage() {
             </nav>
 
             {/* Content sections */}
-            <div id="top" className="pt-12">
+            <div id="top" className="pt-12 mb-12">
                 {/* Top of the page */}
                 <div className="flex justify-between pl-16 pr-16">
                     {/* Text on the left */}
@@ -100,7 +112,7 @@ function LandingPage() {
                         </p>
 
                         <button className="px-8 py-4 rounded bg-purple-500 text-white font-bold hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg mt-6 text-3xl">
-                        SHOP NOW
+                            SHOP NOW
                         </button>
                     </div>
 
@@ -113,17 +125,36 @@ function LandingPage() {
                 </div>
             </div> 
 
-            {/* Footer with dark blue rectangle and scrolling text
-            <div className="fixed bottom-0 left-0 w-full bg-dark-blue text-white">
-                <div className="scrolling-text py-2 text-center">
-                    <span> SHOP TOUSANDS OF BRANDS AT ONCE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROUDLY LOCAL </span>
-                    <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SHOP TOUSANDS OF BRANDS AT ONCE  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PROUDLY LOCAL </span>
-                </div>
-            </div> */}
-
-
-            <div id="trending">
+            <div id="trending" className="border-black border mt-20 ml-10 mr-10">
                 {/* Trending section */}
+                {/* Container for the two parts */}
+                <div className="container mx-auto flex flex-col md:flex-row justify-between items-center" style={{ height: '40vw' }}>
+                    {/* Left half */}
+                    <div className="w-full h-full md:w-1/2 flex flex-col justify-center items-center text-center md:text-center px-4 bg-dark-blue">
+                        {/* Large navy blue square with "Trending" */}
+                        <img src={fire} alt="Fire Icon" className="mx-auto" style={{ width: '100px', height: '100px', marginTop: '30px', marginBottom: '-30px'}} />
+                        <div className="trending-title bg-navy-blue text-white py-8">
+                            <h1 className="text-7xl font-bold mb-4">Trending</h1>
+                            <h2 className="text-4xl font-thin"> BRANDS & PRODUCTS </h2>
+                        </div>
+                    </div>
+
+                    {/* Right half */}
+                    <div className="w-full md:w-1/2 px-4">
+                        {/* Current date */}
+                        <div className="current-date">
+                            <p className="text-2xl">
+                                {month} {day}, {year}
+                            </p>
+                        </div>
+
+                        <div className="flex justify-between mt-2">
+                            <div className="placeholder-square bg-gray-400 h-60 w-1/2"></div>
+                            <div className="placeholder-square bg-black h-60 w-1/2"></div>
+                            <div className="placeholder-square bg-gray-400 h-60 w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="testimonials" className="py-8 bg-gray-100">
@@ -132,8 +163,8 @@ function LandingPage() {
                     {/* Left half for the testimonial */}
                     <div className="w-full md:w-1/2 text-center md:text-center px-4">
                         {/* Add the image of the shopping cart */}
-                        <img src={cart} alt="Shopping Cart" className="mx-auto" style={{ width: '200px', height: '200px', marginBottom: '-50px'}} />
-                        
+                        <img src={cart} alt="Shopping Cart" className="mx-auto" style={{ width: '200px', height: '200px', marginBottom: '-50px' }} />
+
                         {/* Text for 365 orders in the last 2 days */}
                         <p className="text-9xl font-bold text-gray-800">
                             365
@@ -141,7 +172,7 @@ function LandingPage() {
 
                         <p className="text-7xl font-thin text-gray-800">
                             Orders
-                        </p>   
+                        </p>
 
                         <p className="text-5xl font-thin text-gray-800">
                             In The Last 2 Days
@@ -149,50 +180,33 @@ function LandingPage() {
                     </div>
 
                     {/* Right half for testimonials */}
-                    <div className="w-full md:w-1/2 px-4">
+                    <div className="w-full md:w-1/2 px-4 relative">
                         {/* Container for testimonials */}
                         <div
-                            className="testimonials-container bg-blue-500 p-4 rounded-lg relative"
+                            className="testimonials-container bg-blue-500 p-4 rounded-lg mt-16 mb-16"
                             ref={testimonialContainerRef}
-                            style={{ overflowX: 'auto', width: '30rem', height: '20rem'}}
+                            style={{ overflowX: 'hidden', width: '30rem', height: '30rem', display: 'flex', position: 'relative' }}
                         >
-                            {/* Scroll buttons */}
-                            <button
-                                className="scroll-button absolute left-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-purple-700 text-white hover:bg-purple-900"
-                                onClick={() => handleScroll('left')}
-                            >
-                                &lt;
-                            </button>
-                            <button
-                                className="scroll-button absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-purple-700 text-white hover:bg-purple-900"
-                                onClick={() => handleScroll('right')}
-                            >
-                                &gt;
-                            </button>
-
                             {/* Testimonial items */}
-                            <div className="testimonial-content" style={{ overflowX: 'hidden' }}>
-                                <div className="testimonial-item w-full text-white text-center p-4">
-                                    <p>"This is an amazing service! I highly recommend it!"</p>
+                            <div className="testimonial-content" style={{ display: 'flex', flexDirection: 'row', width: 'max-content' }}>
+                                <div className="testimonial-item w-full text-white" style={{ minWidth: '30rem' }}>
+                                    <p className="text-2xl">"This is an amazing service! I highly recommend it!"</p>
                                 </div>
-                                <div className="testimonial-item w-full text-white text-center p-4">
-                                    <p>"Outstanding quality and great customer support."</p>
+                                <div className="testimonial-item w-full text-white" style={{ minWidth: '30rem' }}>
+                                    <p className="text-2xl">"Outstanding quality and great customer support."</p>
                                 </div>
-                                <div className="testimonial-item w-full text-white text-center p-4">
-                                    <p>"I've never had such a smooth shopping experience!"</p>
+                                <div className="testimonial-item w-full text-white" style={{ minWidth: '30rem' }}>
+                                    <p className="text-2xl">"I've never had such a smooth shopping experience!"</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <div id="about">
+            <div id="about" className="bg-dark-blue w-full h-32 md:h-48">
                 {/* About section */}
             </div>
-
-            
         </div>
     );
 }
