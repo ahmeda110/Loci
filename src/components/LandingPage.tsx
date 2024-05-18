@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import login1 from '../assets/log-in-page-image-1.png';
 import login2 from '../assets/log-in-page-image-2.png';
 import cart from '../assets/shopping-cart.png';
@@ -7,6 +7,7 @@ import '../LandingPage.css';
 
 function LandingPage() {
     const testimonialContainerRef = useRef<HTMLDivElement>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Set up autoscroll interval
     useEffect(() => {
@@ -47,6 +48,14 @@ function LandingPage() {
         }
     };
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div>
             {/* Navigation bar */}
@@ -79,7 +88,7 @@ function LandingPage() {
 
                 {/* Right side nav */}
                 <div className="flex items-center gap-2">
-                    <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none">
+                    <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none" onClick={openModal}>
                         Log in
                     </button>
                     <button className="px-6 py-2 rounded bg-purple-500 text-white font-bold hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg">
@@ -188,7 +197,7 @@ function LandingPage() {
                             style={{ overflowX: 'hidden', width: '30rem', height: '30rem', display: 'flex', position: 'relative' }}
                         >
                             {/* Testimonial items */}
-                            <div className="testimonial-content" style={{ display: 'flex', flexDirection: 'row', width: 'max-content' }}>
+                            <div className="testimonial-content" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', transition: 'transform 0.3s ease-in-out' }}>
                                 <div className="testimonial-item w-full text-white" style={{ minWidth: '30rem' }}>
                                     <p className="text-2xl">"This is an amazing service! I highly recommend it!"</p>
                                 </div>
@@ -207,6 +216,57 @@ function LandingPage() {
             <div id="about" className="bg-dark-blue w-full h-32 md:h-48">
                 {/* About section */}
             </div>
+
+            {/* Modal for login */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white rounded-lg p-0 relative flex overflow-hidden" style={{ width: '60%', maxWidth: '900px', height:'90%' }}>
+                        <div className="w-1/2 bg-purple-500 p-8 text-white flex flex-col items-center justify-center">
+                            <p className="text-lg">Log in to your account to continue shopping.</p>
+                        </div>
+                        <div className="w-1/2 p-8">
+                            <button onClick={closeModal} className="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <h2 className="text-2xl font-bold mb-4" >Sign in</h2>
+                            <form>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="email"
+                                        type="email"
+                                        placeholder="Email"
+                                    />
+                                </div>
+                                <div className="mb-6">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                        Password
+                                    </label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="password"
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <button
+                                        className="w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        type="button"
+                                    >
+                                        Sign in
+                                    </button>
+                                </div>  
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
