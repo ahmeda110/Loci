@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import login1 from '../assets/log-in-page-image-1.png';
 import login2 from '../assets/log-in-page-image-2.png';
 import cart from '../assets/shopping-cart.png';
@@ -8,6 +9,7 @@ import '../LandingPage.css';
 function LandingPage() {
     const testimonialContainerRef = useRef<HTMLDivElement>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate(); // Use useNavigate for navigation
 
     // Set up autoscroll interval
     useEffect(() => {
@@ -54,6 +56,10 @@ function LandingPage() {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const navigateToRegister = () => {
+        navigate('/register'); // Navigate to the register page
     };
 
     return (
@@ -189,10 +195,10 @@ function LandingPage() {
                     </div>
 
                     {/* Right half for testimonials */}
-                    <div className="w-full md:w-1/2 px-4 relative">
+                    <div className="w-full md:w-1/2 flex items-center justify-center px-4 relative">
                         {/* Container for testimonials */}
                         <div
-                            className="testimonials-container bg-blue-500 p-4 rounded-lg mt-16 mb-16"
+                            className="testimonials-container bg-blue-500 p-4 rounded-lg"
                             ref={testimonialContainerRef}
                             style={{ overflowX: 'hidden', width: '30rem', height: '30rem', display: 'flex', position: 'relative' }}
                         >
@@ -210,6 +216,7 @@ function LandingPage() {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -219,54 +226,70 @@ function LandingPage() {
 
             {/* Modal for login */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white rounded-lg p-0 relative flex overflow-hidden" style={{ width: '60%', maxWidth: '900px', height:'90%' }}>
-                        <div className="w-1/2 bg-purple-500 p-8 text-white flex flex-col items-center justify-center">
-                            <p className="text-lg">Log in to your account to continue shopping.</p>
-                        </div>
-                        <div className="w-1/2 p-8">
-                            <button onClick={closeModal} className="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                            <h2 className="text-2xl font-bold mb-4" >Sign in</h2>
-                            <form>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                        Email Address
-                                    </label>
-                                    <input
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="email"
-                                        type="email"
-                                        placeholder="Email"
-                                    />
-                                </div>
-                                <div className="mb-6">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                        Password
-                                    </label>
-                                    <input
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="password"
-                                        type="password"
-                                        placeholder="Password"
-                                    />
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <button
-                                        className="w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                        type="button"
-                                    >
-                                        Sign in
-                                    </button>
-                                </div>  
-                            </form>
-                        </div>
-                    </div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg p-0 relative flex overflow-hidden" style={{ width: '70%', maxWidth: '900px', height:'90%' }}>
+            <div className="w-1/2 bg-purple-500 p-8 text-white flex flex-col ">
+                <span className="text-6xl font-bold text-gray-800 mt-10">Loci</span>
+                <p className="text-3xl font-bold mt-6">Don't have an account?</p>
+                <p className="text justify-center mt-2 mb-2" style={{ lineHeight: '1.2' }}>
+                Create an account to instantly start shopping thousands of stores at once.
+                </p>
+                <div className="mb-28 flex flex-col justify-center mt-auto w-full">
+                <button
+                    className="w-3/4 bg-dark-blue hover:bg-purple-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                    onClick={navigateToRegister}
+                >
+                    Create Account
+                </button>
                 </div>
-            )}
+            </div>
+            <div className="w-1/2 p-8">
+                <button onClick={closeModal} className="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                </button>
+                <h2 className="text-4xl font-thin mb-8 mt-14">Sign in</h2>
+                <form>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                        Email Address
+                        </label>
+                        <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email"
+                        type="email"
+                        placeholder="Email"
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                        Password
+                        </label>
+                        <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        />
+                    </div>
+                    <form className="flex flex-col items-center">
+                        <div className="flex items-center  w-full">
+                            <button
+                            className="w-3/4 bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-2 rounded focus:outline-none focus:shadow-outline"
+                            type="button"
+                            >
+                            Sign in
+                            </button>
+                        </div>
+                    </form>
+                </form>
+            </div>
+            </div>
+        </div>
+        )}
+
         </div>
     );
 }
