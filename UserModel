@@ -7,7 +7,6 @@ let userSchema = Schema({
         required: true,
         minlength: 1,
         maxlength: 30,
-        match: /^[A-Za-z]+$/, // Regex to enforce only letters
         trim: true
     },
     password: {
@@ -21,30 +20,6 @@ let userSchema = Schema({
         minlength: 3,
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Regex to check for valid email format
         trim: true
-    },
-    following: {
-        type: [String],
-        default: []
-    },
-    followers: {
-        type: [String],
-        default: []
-    },
-    liked: {
-        type: [String],
-        default: []
-    },
-    accountType: {
-        type: String,
-        default: "Artist"
-    },
-    reviewed: {
-        type: [String],
-        default: []
-    },
-    notifications: {
-        type: [String],
-        default: []
     }
 });
 

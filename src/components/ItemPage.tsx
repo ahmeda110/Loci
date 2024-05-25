@@ -38,23 +38,23 @@ function ItemPage(){
             <div className="flex h-screen bg-gray-100">
                 <div className="w-74 bg-white text-black">
                     <nav className="flex flex-col p-4">
-                        <a href="#" className="mb-4 flex items-center">
+                        <a href="/landing" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={home} alt="Home" />Home
                         </a>
 
-                        <a href="#" className="mb-4 flex items-center">
+                        <a href="/landing" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={compass} alt="Home" />Explore Now
                         </a>
-                        <a href="#" className="mb-4 flex items-center">
+                        <a href="/landing" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={searchIcon} alt="Home" />Search
                         </a>
-                        <a href="#" className="mb-4 flex items-center">
+                        <a href="/landing" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={rewards} alt="Home" />Rewards
                         </a>
-                        <a href="#" className="mb-4 flex items-center">
+                        <a href="/landing" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={categories} alt="Home" />Categories
                         </a>
-                        <a href="#" className="mb-4 flex items-center">
+                        <a href="/landing" className="mb-4 flex items-center">
                             <img className="w-8 h-8 mr-2" src={location} alt="Home" />Location
                         </a>
                     </nav>

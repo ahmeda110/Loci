@@ -19,6 +19,7 @@ app.use(session({
 }));
 
 app.get('/register', sendIndex);
+app.get('/verification', sendIndex);
 app.post('/register', register);
 
 app.get('*', sendIndex);
@@ -32,7 +33,7 @@ async function register(req, res, next) {
 
     // Check if passwords match
     if (password !== passwordConfirm) {
-        res.status(400).send('Passwords do not match');
+        res.status(400).json({ message: 'Passwords do not match' });
         return;
     }
 
@@ -41,7 +42,7 @@ async function register(req, res, next) {
         const existingUser = await mongoose.connection.db.collection("users").findOne({ email });
 
         if (existingUser) {
-            res.status(400).send('Email is already registered');
+            res.status(400).json({ message: 'Email is already registered' });
             return;
         }
 
@@ -55,14 +56,14 @@ async function register(req, res, next) {
         // Save the user to the database
         await newUser.save();
 
-        res.status(201).send('User registered successfully');
+        res.redirect('/verification');
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
-mongoose.connect('mongodb://127.0.0.1/OG');
+mongoose.connect('mongodb://127.0.0.1/Loci');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', async function() {
