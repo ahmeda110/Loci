@@ -97,7 +97,7 @@ function LandingPage() {
                     <button className="px-6 py-2 text-black font-bold hover:text-gray-500 focus:outline-none" onClick={openModal}>
                         Log in
                     </button>
-                    <button className="px-6 py-2 rounded bg-purple-500 text-white font-bold hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg">
+                    <button className="px-6 py-2 rounded custom-purple-bg text-white font-bold hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg">
                         SHOP NOW
                     </button>
                 </div>
@@ -126,7 +126,7 @@ function LandingPage() {
                             push of a button.
                         </p>
 
-                        <button className="px-8 py-4 rounded bg-purple-500 text-white font-bold hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg mt-6 text-3xl">
+                        <button className="px-8 py-4 rounded custom-purple-bg text-white font-bold hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg mt-6 text-3xl">
                             SHOP NOW
                         </button>
                     </div>
@@ -228,7 +228,7 @@ function LandingPage() {
             {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg p-0 relative flex overflow-hidden" style={{ width: '70%', maxWidth: '900px', height:'90%' }}>
-            <div className="w-1/2 bg-purple-500 p-8 text-white flex flex-col ">
+            <div className="w-1/2 custom-purple-bg p-8 text-white flex flex-col ">
                 <span className="text-6xl font-bold text-gray-800 mt-10">Loci</span>
                 <p className="text-3xl font-bold mt-6">Don't have an account?</p>
                 <p className="text justify-center mt-2 mb-2" style={{ lineHeight: '1.2' }}>
@@ -251,7 +251,7 @@ function LandingPage() {
                 </svg>
                 </button>
                 <h2 className="text-4xl font-thin mb-8 mt-14">Sign in</h2>
-                <form>
+                <form action="/login" method="POST">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         Email Address
@@ -260,6 +260,7 @@ function LandingPage() {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         type="email"
+                        name="email"
                         placeholder="Email"
                         />
                     </div>
@@ -271,19 +272,19 @@ function LandingPage() {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="password"
                         type="password"
+                        name="password"
                         placeholder="Password"
                         />
                     </div>
-                    <form className="flex flex-col items-center">
-                        <div className="flex items-center  w-full">
-                            <button
-                            className="w-3/4 bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-2 rounded focus:outline-none focus:shadow-outline"
-                            type="button"
-                            >
-                            Sign in
-                            </button>
-                        </div>
-                    </form>
+                    <div className="flex items-center  w-full">
+                        <button
+                        className="w-3/4 custom-purple-bg text-white font-bold py-3 px-2 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                        id= "submit"
+                        >
+                        Sign in
+                        </button>
+                    </div>
                 </form>
             </div>
             </div>

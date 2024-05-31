@@ -3,6 +3,20 @@
     background-color: #001f3f; /* Dark blue color code */
 }
 
+.custom-purple-bg {
+    background-color: #8960eb;
+}
+
+.custom-purple-text {
+    color: #8960eb;
+}
+
+.custom-purple:hover {
+    background-color: #6643cc; /* A darker shade for hover effect */
+}
+
+
+
 /* Testimonials.css */
 .testimonials-container {
     position: relative;
