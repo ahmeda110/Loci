@@ -51,8 +51,7 @@ async function register(req, res, next) {
             res.status(400).json({ message: 'Email is already registered' });
             return;
         }
-
-        // Add pepper to the password
+        
         const pepperedPassword = password + pepper;
 
         // Hash the password with bcrypt
@@ -118,7 +117,6 @@ async function login(req, res, next) {
         res.status(500).send("Internal Server Error");
     }
 }
-
 
 mongoose.connect('mongodb://127.0.0.1/Loci');
 const db = mongoose.connection;

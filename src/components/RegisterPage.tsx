@@ -27,7 +27,7 @@ function RegisterPage() {
             return;
         }
 
-        form.submit(); // Submit the form if all validations pass
+        form.submit(); 
     };
 
     return (
